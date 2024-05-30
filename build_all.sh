@@ -1,20 +1,17 @@
 #!/bin/bash
 
-docker-remove-all.sh
+# Remove all containers
+docker rm -vf $(docker ps -aq) > /dev/null 2>&1
+
+# Remove all images
+docker rmi -f $(docker images -aq) > /dev/null 2>&1
+
 docker network rm aijaz_network
 
-pushd flask || exit
-./build.sh
-popd || exit
+for f in flask nginx postgres;
+  do
+    pushd $f || exit 1
+    ./build.sh
+    popd || exit 1
+  done
 
-pushd nginx || exit
-./build.sh
-popd || exit
-
-pushd postgres || exit
-./build.sh
-popd || exit
-
-pushd ubuntu || exit
-./build.sh
-popd || exit
