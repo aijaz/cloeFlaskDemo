@@ -12,3 +12,12 @@ services:
       image: aijaz_flask_i
       expose:
          - "8000"
+
+   aijaz_pg_c:
+      image: aijaz_pg_i
+      ports:
+         - 5432:5432
+      volumes:
+         -  /tmp/pg_data:/var/lib/postgresql/data
+      environment:
+         - POSTGRES_PASSWORD='mysecretpassword'
