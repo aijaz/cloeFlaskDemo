@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+   aijaz_nginx_c:
+      image: aijaz_nginx_i
+      volumes:
+         - ./document_root:/var/www/document_root
+      ports:
+         - "80:80"
+
+   aijaz_flask_c:
+      image: aijaz_flask_i
+      expose:
+         - "8000"
